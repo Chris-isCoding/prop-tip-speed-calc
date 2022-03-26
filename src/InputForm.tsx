@@ -1,15 +1,17 @@
-import './styles/InputForm.css'
-
+import './styles/InputForm.css';
 
 export default function InputForm(props: any) {
-
-
   return (
-    <div className="input-form">
-
-      <form className='form' onSubmit={(e) => props.calculate(e)}>
-
-        <div className='units'>Units:
+    <div className='input-form'>
+      <form
+        className='form'
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.calculate();
+        }}
+      >
+        <div className='units'>
+          Units:
           <label>
             <input
               type='radio'
@@ -17,11 +19,9 @@ export default function InputForm(props: any) {
               value='imperial'
               checked={props.units === 'imperial'}
               onChange={(e) => props.handleUnits(e.target.value)}
-              >
-            </input>
+            ></input>
             Imperial
           </label>
-
           <label>
             <input
               type='radio'
@@ -29,15 +29,15 @@ export default function InputForm(props: any) {
               value='metric'
               checked={props.units === 'metric'}
               onChange={(e) => props.handleUnits(e.target.value)}
-              >
-            </input>
+            ></input>
             Metric
           </label>
         </div>
 
         <div className='inputs'>
-
-          <label>Prop Dia.{props.units === 'imperial' ? ' (in)' : ' (mm)'}</label>
+          <label>
+            Prop Dia.{props.units === 'imperial' ? ' (in)' : ' (mm)'}
+          </label>
 
           <input
             placeholder='0'
@@ -45,8 +45,7 @@ export default function InputForm(props: any) {
             step='any'
             inputMode='decimal'
             onChange={(e) => props.handlePropDia(parseInt(e.target.value))}
-            >
-          </input>
+          ></input>
 
           <label>Batt Volts (V)</label>
           <input
@@ -55,8 +54,7 @@ export default function InputForm(props: any) {
             step='any'
             placeholder='0'
             onChange={(e) => props.handleBattV(parseInt(e.target.value))}
-          >
-          </input>
+          ></input>
 
           <label>Motor (kV)</label>
           <input
@@ -65,10 +63,11 @@ export default function InputForm(props: any) {
             step='any'
             placeholder='0'
             onChange={(e) => props.handleMotorKv(parseInt(e.target.value))}
-          >
-          </input>
+          ></input>
 
-          <button type="submit" className='submit'>CALCULATE</button>
+          <button type='submit' className='submit'>
+            CALCULATE
+          </button>
         </div>
 
         <div className='options'>
@@ -79,8 +78,7 @@ export default function InputForm(props: any) {
             step='any'
             placeholder='0'
             onChange={(e) => props.handleAirspeed(parseInt(e.target.value))}
-          >
-          </input>
+          ></input>
 
           <label>Altitude</label>
           <input
@@ -89,24 +87,20 @@ export default function InputForm(props: any) {
             step='any'
             placeholder='0'
             onChange={(e) => props.handleAltitude(parseInt(e.target.value))}
-          >
-          </input>
+          ></input>
 
           <label>Zip Code</label>
           <input
             type='text'
             placeholder='0'
             onChange={(e) => props.handleZip(e.target.value)}
-          >
-          </input>
+          ></input>
 
-          <button
-            className='submit'
-            onClick={(e) => props.getConditions(e)}
-          >WEATHER</button>
+          <button className='submit' onClick={(e) => props.getConditions(e)}>
+            WEATHER
+          </button>
         </div>
-
       </form>
     </div>
-  )
+  );
 }

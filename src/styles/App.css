@@ -5,12 +5,12 @@
   to {
     transform: rotate(360deg);
   }
+}
 
-}@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 4s linear;
   }
-
 }
 
 @media screen and (max-width: 540px) {
@@ -34,10 +34,10 @@
 
   .diameter-units {
     font-size: 1em;
-    
   }
 
-  .form, .units {
+  .form,
+  .units {
     font-size: 1em !important;
   }
 
@@ -45,17 +45,17 @@
     width: 95%;
   }
 
-  [type=radio] {
+  [type='radio'] {
     vertical-align: text-top;
     height: 30px !important;
     width: 30px !important;
   }
 
-  [type=number], [type=text] {
+  [type='number'],
+  [type='text'] {
     height: 40px !important;
     font-size: 1em !important;
   }
-
 }
 
 header > p {

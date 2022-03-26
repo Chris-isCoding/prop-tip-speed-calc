@@ -1,29 +1,23 @@
-function tipSpeedCalculator(diameter: number, volts: number, kVolts: number) {
+import { round } from './utilities';
 
-    const circumferenceInches: number = diameter * Math.PI;
-    const circumferenceMM: number = circumferenceInches * 25.4;
-    const rpm: number = volts * kVolts;
-    // console.log( { circumferenceInches, circumferenceMM, rpm } );
+function tipSpeedCalculator(
+  diameter: number,
+  volts: number,
+  kVolts: number,
+  airspeed: number = 0
+) {
+  const circumferenceInches: number = diameter * Math.PI;
+  const circumferenceMM: number = circumferenceInches * 25.4;
+  const rpm: number = volts * kVolts;
 
-    const inchesPerMinute: number = circumferenceInches * rpm;
-    const millimetersPerMinute: number = circumferenceMM * rpm;
-    // console.log( { inchesPerMinute, millimetersPerMinute } );
+  const millimetersPerMinute: number = circumferenceMM * rpm;
+  const metersPerMinute: number = millimetersPerMinute / 1000;
 
-    const feetPerMinute: number = inchesPerMinute / 12;
-    const metersPerMinute: number = millimetersPerMinute / 1000;
-    // console.log( { feetPerMinute, metersPerMinute } );
+  const kilometersPerHour: number = round((metersPerMinute / 1000) * 60);
+  const milesPerHour = round(kilometersPerHour * 0.62137119224);
 
-    const milesPerMinute: number = feetPerMinute / 5280;
-    const kilometersPerMinute: number = metersPerMinute / 1000;
-    // console.log( { milesPerMinute, kilometersPerMinute } );
-
-    const milesPerHour: number = parseFloat((milesPerMinute * 60).toFixed(2));
-    const kilometersPerHour: number = parseFloat((kilometersPerMinute * 60).toFixed(2));
-    // console.log( { milesPerHour, kilometersPerHour } );
-
-    return {milesPerHour, kilometersPerHour};
+  return [milesPerHour + airspeed, kilometersPerHour + airspeed];
 }
-
 
 /*
   RPM = V * kV
@@ -33,7 +27,6 @@ function tipSpeedCalculator(diameter: number, volts: number, kVolts: number) {
   MPH = miPerMin / 60
 
   */
-
 
 console.log(tipSpeedCalculator(6, 22.2, 2400));
 /*
@@ -46,4 +39,4 @@ console.log(tipSpeedCalculator(5, 25, 1800));
   kilometersPerHour: 1077.25212091594
 */
 
-export {}
+export default tipSpeedCalculator;
